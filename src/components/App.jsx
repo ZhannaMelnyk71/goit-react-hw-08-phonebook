@@ -1,89 +1,22 @@
-import React, { useEffect } from 'react';
-import { Layout } from './Layout/Layout.styled';
-import { Route, Routes } from 'react-router-dom';
-import { Home } from '../pages/Home/Home';
-import { useDispatch } from 'react-redux';
-import { useAuth } from 'hooks';
-import { refreshUser } from 'redux/user/userOperations';
-import { PrivateRoute } from './PrivateRoute';
-import { RestrictedRoute } from './RestricredRoute';
-import { Loader } from './Loader/Loader';
-import { Register } from 'pages/Register/Register';
-import { Login } from 'pages/Login/Login';
-import { Contacts } from 'pages/Contacts/Contacts';
-// import { AppBar } from './AppBar/AppBar';
-// import { UserMenu } from './UserMenu/UserMenu';
+
+import { Filter } from './Phonebook/Filter/Filter'
+import { ContactsList } from "./Phonebook/ContactList/ContactsList";
+import { ContactForm } from "./Phonebook/ContactForm/ContactForm";
 
 export const App = () => {
-  const dispatch = useDispatch();
-  const { isRefreshing } = useAuth();
-
-  useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
-
-  // return (
-  //   <>
-  //     {/* <AppBar /> */}
-  //     {/* <Loader /> */}
-  //     <Routes>
-  //       <Route path="/" element={<Layout />}>
-  //         <Route index element={<Home />} />
-
-  //         <Route
-  //           path="/register"
-  //           element={
-  //             <RestrictedRoute
-  //               redirectTo="/contacts"
-  //               component={<Register />}
-  //             />
-  //           }
-  //         />
-  //         <Route
-  //           path="/login"
-  //           element={
-  //             <RestrictedRoute redirectTo="/contacts" component={<Login />} />
-  //           }
-  //         />
-
-  //         <Route
-  //           path="/contacts"
-  //           element={
-  //             <PrivateRoute redirectTo="/login" component={<Contacts />} />
-  //           }
-  //         />
-  //       </Route>
-  //     </Routes>
-  //     <UserMenu />
-  //   </>
-  // );
-  return isRefreshing ? (
-    <Loader />
-  ) : (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<Register />} />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
-          }
-        />
-
-        <Route
-          path="/contacts"
-          element={
-            <PrivateRoute redirectTo="/login" component={<Contacts />} />
-          }
-        />
-      </Route>
-    </Routes>
+  return (
+    <div
+      style={{
+        height: '100vh',
+        fontSize: 20,
+        color: '#010101',
+        padding: 30,
+        
+      }}
+    >
+        <ContactForm />
+        <Filter />
+        <ContactsList/>
+    </div>
   );
 };
